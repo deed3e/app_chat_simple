@@ -1,0 +1,98 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<title>Home</title>
+  <style type="text/css">
+    .on{
+      color: green;
+    }
+    .off{
+      color: red;
+    }
+    #typing{
+      font-size: .6rem;
+      color: grey;
+      opacity: 0.8;
+      font-family: sans-serif;
+    }
+    .box-chat{
+        background-color: white;
+        width: 250px;
+        height: 400px;
+        overflow: scroll;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt">
+	   <div class="row mt-40">
+        <div class="col-sm-5">
+            <h2>Trạng thái bạn bè</h1>
+            <ul id="list-on"></ul>
+       </div>
+        <div class="col-md-7">
+          <h1>App chat  !!!</h1>
+          <div class="box-chat"> 
+              <ul id="messages"></ul>
+          </div>
+          <input type="text" id="chat-mess" autocomplete="off"/>
+          <button id="send-chat" onclick="send()">Send</button>
+         </div>
+
+        </div>
+  </div>
+	
+ <script src="/socket.io/socket.io.js"></script>
+ <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+ <script>
+          const socket = io();
+          const name = prompt("Enter your Nick Name?");
+          const chatMess=document.getElementById('chat-mess');
+          const item=document.getElementById('messages');  
+          socket.emit('auth',name);
+          socket.emit('update-list',name)
+        
+          function send(){
+            let data=chatMess.value;
+            socket.emit('on-chat',{
+                 messages:data,
+                 name,
+               });
+            chatMess.value='';
+             $('#typing').remove();
+
+          }
+
+            socket.on('list-users',(users)=>{
+               $('#list-on').empty();
+              for(let i=0;i<users.length;i++){             
+                $('#list-on').append('<li class="on">'+users[i]+'</li>');
+
+              }
+              
+              
+          })
+          $('#chat-mess').focusin(()=>{
+            socket.emit('typing');
+          })
+          socket.on('send-typing',(s)=>{
+            $('#messages').append(`<li id='typing'>${s}</li>`);
+          })
+          $('#chat-mess').focusout(()=>{
+            socket.emit('out-typing');
+          })
+          socket.on('send-out-typing',()=>{
+            $('#typing').remove();
+          })
+          socket.on('user-chat',(data)=>{
+              $('#messages').append('<li>'+data.name+':'+data.messages+ '</li>');
+          })
+        
+
+       
+ </script>   
+</body>`
+</html>
