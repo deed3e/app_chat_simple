@@ -45,8 +45,16 @@
         </div>
   </div>
 	
+<<<<<<< HEAD
  <script src="https://websocketver1.herokuapp.com/socket.io/socket.io.js"></script>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<<<<<<< HEAD
+=======
+=======
+ <script src="/socket.io/socket.io.js"></script>
+ <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+>>>>>>> parent of 4f4e3fb... oke3
+>>>>>>> new
  <script>
           const socket = io('https://git.heroku.com/websocketver1.git');
           const name = prompt("Enter your Nick Name?");
@@ -55,7 +63,15 @@
           socket.emit('auth',name);
           socket.emit('update-list',name)
         
+<<<<<<< HEAD
           function send("https://websocketver1.herokuapp.com/"){
+=======
+<<<<<<< HEAD
+          function send("https://websocketver1.herokuapp.com/"){
+=======
+          function send(){
+>>>>>>> parent of 4f4e3fb... oke3
+>>>>>>> new
             let data=chatMess.value;
             socket.emit('on-chat',{
                  messages:data,
