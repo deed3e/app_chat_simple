@@ -8,11 +8,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-<<<<<<< HEAD
 },
-=======
-  },
->>>>>>> new
   "dependencies": {
     "delay": "^5.0.0",
     "express": "^4.17.1",
