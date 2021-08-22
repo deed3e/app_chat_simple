@@ -45,10 +45,10 @@
         </div>
   </div>
 	
- <script src="https://websocketver1.herokuapp.com/socket.io/socket.io.js"></script>
+ <script src="/socket.io/socket.io.js"></script>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
  <script>
-          const socket = io('https://git.heroku.com/websocketver1.git');
+          const socket = io();
           const name = prompt("Enter your Nick Name?");
           const chatMess=document.getElementById('chat-mess');
           const item=document.getElementById('messages');  
